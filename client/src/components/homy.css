@@ -1,0 +1,90 @@
+.center{
+    color:white;
+}
+
+.text{
+    font-family: cursive;
+}
+
+.card-style{
+    margin-top: 3%;
+}
+
+.chart-style{
+    padding-left: 3%;
+    padding-top: 5%;
+}
+
+.entire-page{
+    overflow: 'auto';
+    height: 'inherit';
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 5%;
+}
+.nav-design{
+    margin-top: 0rem;
+    color:white;
+    background-color:white;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+h1{
+    font-family: monospace;
+}
+
+#dropdown-basic-button{
+    background-color: black;
+    margin-left: 40%;
+    
+}
+
+.nav-text{
+    color:black;
+    
+}
+
+.card-header{
+    background-color: #0096fb;
+    color: white;
+}
+blockquote{
+margin: 0 0 1rem;
+padding-left: 1.5rem;
+border-left: 5px solid #ef8f1d;
+}
+
+.disease-heading{
+    text-align: center;
+    margin-right: 2%;
+}
+.chart-design{
+    padding-left: 1%;
+    padding-top: 1%;
+}
+._2OR24XnUXt8OCrysr3G0XI{
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.predicted{
+    font-family: 'Cabin Sketch', cursive;
+    color:red;
+    text-align: center;
+    padding-top: 5%;
+    font-size: 3rem;
+}
+
+.logo{
+    color:black;
+    font-size: 2rem;
+}
+.img-design{
+    width: 500px;
+    height:500px
+}
+
+.card-style1{
+    margin-right: 50%;
+}
