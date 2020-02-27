@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import 'materialize-css/dist/css/materialize.min.css'
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import getWeb3 from "./getWeb3";
 import {Button, Card} from 'react-bootstrap';

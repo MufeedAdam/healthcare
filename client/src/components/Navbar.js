@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom'
 import './homy.css'
-
+import 'materialize-css/dist/css/materialize.min.css'
 const Navbar = () => {
     return (
         <nav className="nav-design">

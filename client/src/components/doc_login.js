@@ -82,7 +82,8 @@ class doc_login extends Component {
     if(name==body.username && password==body.password)
     {
       console.log("Correct")
-
+      alert("Successful")
+      window.location.href="doc_home"
     }
     else
     {

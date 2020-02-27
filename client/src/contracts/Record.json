@@ -6348,12 +6348,12 @@
         }
       },
       "links": {},
-      "address": "0xcB8A9819Fb14Cf2A50fFA4665B3d491604d36944",
-      "transactionHash": "0x974e9c8081a1d5480029c38ede4c6bfe182b6d93f2f51e0a65f3a8ace43c9c26"
+      "address": "0x9a82aC4271D4bcE84B32B8B328C5C146d9c14966",
+      "transactionHash": "0xc184fdaaaf336b6b7c0cead50b23926d96c2d9795d4fdb2215897329f028dd80"
     }
   },
   "schemaVersion": "3.0.23",
-  "updatedAt": "2020-02-26T15:29:00.935Z",
+  "updatedAt": "2020-02-27T03:52:05.314Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

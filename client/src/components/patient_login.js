@@ -69,14 +69,18 @@ class patient_login extends Component {
     const password = await this.state.contract.methods.find_user_password(body.address).call();
     console.log(name)
     console.log(password)
+    console.log(body.username)
+    console.log(body.password)
     if(name==body.username && password==body.password)
     {
       console.log("Correct")
-
+      alert("Successful")
+      window.location.href="home"
     }
     else
     {
       console.log("Fail")
+      alert("Wrong Password or Username")
     }
   }
 
@@ -149,11 +153,11 @@ class patient_login extends Component {
                 </li>
                  <li>
                   <label for="password">Address:</label>
-                  <input type="text" id="address" onChange={(e) =>this.handlepassword(e)} required/>
+                  <input type="text" id="address" onChange={(e)=>this.handleaddress(e)} required/>
                 </li>
                 <li>
                   <label for="password">Password:</label>
-                  <input type="password" id="password" required/>
+                  <input type="password" id="password" onChange={(e) =>this.handlepassword(e)} required/>
                 </li>
                 <li>
                   <i/>
