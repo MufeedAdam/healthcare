@@ -8,11 +8,45 @@ import Navbar from './Navbar'
 import Activity from './Activity'
 import Labrecord from './Labrecord'
 import Login from './Login'
+import getWeb3 from "../getWeb3";
+import RecordContract from "../contracts/Record.json";
 import { BrowserRouter, Route } from 'react-router-dom'
 import { MultiSelect } from '@progress/kendo-react-dropdowns';
 const symptoms = [ "Vommiting", "Headache", "Fever", "Common cold", "Tonsils", "Cough"];
 
 class doc_home extends Component{
+
+
+  state = {  web3: null, accounts: null, contract: null, username: null, password: null, address: null};
+
+  componentDidMount = async () => {
+    try {
+      // Get network provider and web3 instance.
+      const web3 = await getWeb3();
+
+      // Use web3 to get the user's accounts.
+      const accounts = await web3.eth.getAccounts();
+
+      // Get the contract instance.
+      const networkId = await web3.eth.net.getId();
+      const deployedNetwork = RecordContract.networks[networkId];
+      const instance = new web3.eth.Contract(
+        RecordContract.abi,
+        deployedNetwork && deployedNetwork.address,
+      );
+
+      // Set web3, accounts, and contract to the state, and then proceed with an
+      // example of interacting with the contract's methods.
+      this.setState({ web3, accounts, contract: instance });
+      
+    } catch (error) {
+      // Catch any errors for any of the above operations.
+      alert(
+        `Failed to load web3, accounts, or contract. Check console for details.`,
+      );
+      console.error(error);
+    }
+  };  
   constructor(props) {
     super(props);
     this.state = {
@@ -103,14 +137,17 @@ handleSubmit_doc_home = async (e) =>{
    const medicine=medicines.split(",");
    console.log(medicine) 
    
-   
+   const ad_date=this.state.add_date;
+   const add_date=new Date(ad_date).getTime()
+   const unix_time=Math.floor(add_date/1000)
+   console.log(unix_time)
    
    const body={
       patname:this.state.patname,
-      add_date:this.state.add_date,
+      add_date:unix_time,
       disease:diseases,
       medicines:medicine ,
-      symptoms:this.state.symptoms
+      symptoms:symptoms
     }
     console.log(this.state.patname);
     console.log(this.state.add_date);
@@ -119,6 +156,9 @@ handleSubmit_doc_home = async (e) =>{
     console.log(this.state.symptoms)
     console.log(body)
 
+    await this.state.contract.methods.addRecord(body.patname,this.state.accounts[0],body.add_date,body.symptoms,body.medicines,body.disease).send({ from: this.state.accounts[0] })
+    //const response = await this.state.contract.methods.getRecord(body.address).call();
+    //console.log(response)
 }
 
   render(){

@@ -1,5 +1,4 @@
 pragma solidity >=0.4.21 <0.7.0;
-
 pragma experimental ABIEncoderV2;
 contract Record
 {
@@ -58,15 +57,17 @@ contract Record
     struct record{
      address doctor;
      address patient;
-     uint256 _admissionDate;
+     uint256 admissionDate;
      string[] symptoms;
+     string[] disease;
+     string[] medicine;
     }
    
     event HospitalAddition(address hospital);
    
     mapping (address => bool) public isHospital;
     mapping(address => doctor)  public doctorlist;
-    mapping(uint256 => mapping(address => record)) public recordList;
+    mapping(address => mapping(uint256 => record)) public recordList;
 
      function addHospital(address _hospital)   public
 
@@ -83,10 +84,21 @@ contract Record
         doctorlist[_doctoraddress]=doctor(_doctorname,_password,_doctoraddress,_doctorset);
     }
    
-    function addRecord(address _patientaddress,address _docaddress,uint256 _addmissiondate,string[] memory _symptomsnames) public{
+    function addRecord(address _patientaddress,address _docaddress,uint256 _addmissiondate,string[] memory _symptomsnames,string[] memory _medicine,string[] memory _disease) public{
      
-        recordList[recordCount][_patientaddress]=record(_docaddress,_patientaddress,_addmissiondate,_symptomsnames);
+        recordList[_patientaddress][recordCount]=record(_docaddress,_patientaddress,_addmissiondate,_symptomsnames,_disease,_medicine);
         recordCount+=1;
+    }
+    function getRecord(address _patientaddress,uint256 _recordnum) public view returns(
+     
+     uint256 _admissionDate,
+     string[] memory _symptoms,
+     string[] memory _disease,
+     string[] memory _medicine){
+       _medicine= recordList[_patientaddress][_recordnum].medicine;
+       _symptoms=recordList[_patientaddress][_recordnum].symptoms;
+       _disease=recordList[_patientaddress][_recordnum].disease;
+       _admissionDate=recordList[_patientaddress][_recordnum].admissionDate;
     }
     
     function getDoctorName(address _docaddress)  public view returns(string memory){
