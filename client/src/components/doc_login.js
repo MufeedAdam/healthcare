@@ -54,6 +54,7 @@ class doc_login extends Component {
       address:this.state.address,
       password:this.state.password
     }
+    console.log(body)
     await this.state.contract.methods.addDoctor(body.username,body.password,body.address,'True').send({ from: this.state.accounts[0] })
     // Get the value from the contract to prove it worked.
    const response = await this.state.contract.methods.getDoctorName(body.address).call();
@@ -74,6 +75,7 @@ class doc_login extends Component {
       address:this.state.address,
       password:this.state.password
     }
+    console.log(body.address)
    // await this.state.contract.methods.addDoctor(body.username,body.password,body.address,'True').send({ from: this.state.accounts[0] })
     const name = await this.state.contract.methods.getDoctorName(body.address).call();
     const password = await this.state.contract.methods.getDoctorPassword(body.address).call();

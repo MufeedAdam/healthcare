@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Labrecord from './Labrecord'
 import Login from './Login'
-import {Card ,DropdownButton,Dropdown,Modal, CardDeck } from 'react-bootstrap';
+import {Card ,Table, DropdownButton,Dropdown,Modal, CardDeck } from 'react-bootstrap';
 import { BrowserRouter, Route } from 'react-router-dom'
 import Navbar from './Navbar'
 const Activity = () => {
@@ -10,6 +10,41 @@ const Activity = () => {
         <div> 
         <div> <Navbar/>
             <div className="entire-page">
+                <Table striped bordered hover>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Admission date</th>
+                            <th>Symptoms detected</th>
+                            <th>Disease Predicted</th>
+                            <th>Medicines prescribed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>161727373</td>
+                            <td>Common Cold,Bodyache,Fever</td>
+                            <td>Malaria</td>
+                            <td>Paracetemol,Antibiotic</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>143727373</td>
+                            <td>Weakness</td>
+                            <td>Anemia</td>
+                            <td>Iron tablets</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>134727373</td>
+                            <td>sleeping</td>
+                            <td>Sleeping sickness</td>
+                            <td>Coffee</td>
+                        </tr>
+                    </tbody>
+
+                </Table>
              <CardDeck>  
             <Card className="card-style1">
             <Card.Header>X-ray 1</Card.Header>

@@ -51,6 +51,7 @@ class doc_home extends Component{
     super(props);
     this.state = {
       patname:'',
+      docaddr:'',
       add_date:'',
       disease:[],
       symptoms:[],
@@ -95,7 +96,15 @@ patname = (e) =>{
       [e.target.id]:e.target.value
     })
     console.log(this.state)
-   } 
+   }
+   
+   
+docaddr = (e) =>{
+    this.setState({
+      [e.target.id]:e.target.value
+    })
+    console.log(this.state)
+   }   
 
 add_date = (e) =>{
     this.setState({
@@ -131,34 +140,37 @@ handleSubmit_doc_home = async (e) =>{
       
    const disease=this.state.disease;
    const diseases=disease.split(",");
-   console.log(diseases) 
+  // console.log(diseases) 
     
    const medicines=this.state.medicines;
    const medicine=medicines.split(",");
-   console.log(medicine) 
+   //console.log(medicine) 
    
    const ad_date=this.state.add_date;
    const add_date=new Date(ad_date).getTime()
    const unix_time=Math.floor(add_date/1000)
-   console.log(unix_time)
+   //onsole.log(unix_time)
    
    const body={
       patname:this.state.patname,
+      docaddr:this.state.docaddr,
       add_date:unix_time,
       disease:diseases,
       medicines:medicine ,
       symptoms:symptoms
     }
-    console.log(this.state.patname);
-    console.log(this.state.add_date);
-    console.log(this.state.disease);
-    console.log(this.state.medicines);
-    console.log(this.state.symptoms)
-    console.log(body)
-
-    await this.state.contract.methods.addRecord(body.patname,this.state.accounts[0],body.add_date,body.symptoms,body.medicines,body.disease).send({ from: this.state.accounts[0] })
-    //const response = await this.state.contract.methods.getRecord(body.address).call();
-    //console.log(response)
+    //console.log(this.state.patname);
+    //console.log(this.state.docaddr)
+    //console.log(this.state.add_date);
+    //console.log(this.state.disease);
+    //console.log(this.state.medicines);
+   // console.log(this.state.symptoms)
+  //  console.log(body)
+    console.log(this.state.contract)
+    
+    //await this.state.contract.methods.addRecord(body.patname, body.docaddr,body.add_date,body.symptoms,body.medicines,body.disease).send({from:body.docaddr})
+    const response = await this.state.contract.methods.getRecord(body.patname,0).call();
+    console.log(response)
 }
 
   render(){
@@ -175,10 +187,17 @@ handleSubmit_doc_home = async (e) =>{
         <div className="entire-page">
            <Form>
   <Form.Group>
-    <Form.Label>Patient Name</Form.Label>
-    <Form.Control type="text" id="patname" name="patname" placeholder="Enter Patient's Name" onChange={(e) => this.patname(e)} required/>
+    <Form.Label>Patient Address</Form.Label>
+    <Form.Control type="text" id="patname" name="patname" placeholder="Enter Patient's Address" onChange={(e) => this.patname(e)} required/>
     
   </Form.Group>
+
+  <Form.Group>
+    <Form.Label>Doctor Address</Form.Label>
+    <Form.Control type="text" id="docaddr" name="docaddr" placeholder="Enter Doctor's Address" onChange={(e) => this.docaddr(e)} required/>
+    
+  </Form.Group>
+
 
   <Form.Group>
     <Form.Label>Admission Date</Form.Label>
