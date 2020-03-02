@@ -28,14 +28,14 @@ handleSubmit_pat = (e) =>{
 
         
         return (
-            <div >
+            <div className="main_login">
                 <h1 align="center">Who are You?</h1>
             <Card className="main-card">
-            <Button variant="warning" className="front-page" onClick={(e) =>this.handleSubmit_doc(e)}>Doctor</Button>
+            <Button variant="outline-primary" className="front-page" onClick={(e) =>this.handleSubmit_doc(e)}>Doctor</Button>
             <br></br>
             <br></br>
             
-            <Button variant="warning" className="front-page" onClick={(e) =>this.handleSubmit_pat(e)}>Patient</Button>
+            <Button variant="outline-primary" className="front-page" onClick={(e) =>this.handleSubmit_pat(e)}>Patient</Button>
             </Card>
             </div>
         );

@@ -1,6 +1,6 @@
 .front-page{
-    margin-top: 2%;
-    margin-left: 20%;
+    margin-top: 5%;
+    margin-left: 42%;
     margin-right: 20%;
     margin-bottom: 5%;
 }
@@ -9,4 +9,17 @@
     margin-left: 30%;
     margin-right: 30%;
     margin-top: 10%;
+    background-color:white;
+}
+.center p{
+    color: black;
+}
+
+.acti{
+    margin-top:10%;
+    color:black;
+}
+
+.multi{
+    color:black;
 }

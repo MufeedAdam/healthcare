@@ -57,19 +57,7 @@ class doc_home extends Component{
       symptoms:[],
       medicines:[],
       plainArray: ["headache", "vommiting", "throught pain", "bodyache", "stomach pain"],
-      objectArray: [
-        { key: "headache", cat: "Group 1" },
-        { key: "vommiting", cat: "Group 1" },
-        { key: "throught pain", cat: "Group 1" },
-        { key: "bodyache", cat: "Group 2" },
-        { key: "stomach pain", cat: "Group 2" },
-        { key: "Option 6", cat: "Group 2" },
-        { key: "Option 7", cat: "Group 2" }
-      ],
-      selectedValues: [
-        { key: "Option 1", cat: "Group 1" },
-        { key: "Option 2", cat: "Group 1" }
-      ]
+      
     };
     this.style = {
       chips: {
@@ -168,9 +156,9 @@ handleSubmit_doc_home = async (e) =>{
   //  console.log(body)
     console.log(this.state.contract)
     
-    //await this.state.contract.methods.addRecord(body.patname, body.docaddr,body.add_date,body.symptoms,body.medicines,body.disease).send({from:body.docaddr})
-    const response = await this.state.contract.methods.getRecord(body.patname,0).call();
-    console.log(response)
+    await this.state.contract.methods.addRecord(body.patname, body.docaddr,body.add_date,body.symptoms,body.medicines,body.disease).send({from:this.state.accounts[0]})
+   // const response = await this.state.contract.methods.getRecord(body.patname,0).call();
+   // console.log(response)
 }
 
   render(){
@@ -202,8 +190,7 @@ handleSubmit_doc_home = async (e) =>{
   <Form.Group>
     <Form.Label>Admission Date</Form.Label>
     <Form.Control type="date" id="add_date" name="add_date" placeholder="Enter the date" onChange={(e) => this.add_date(e)}/>
-  </Form.Group>
-  <Form.Group>
+  </Form.Group>  <Form.Group>
     
 {/* <Multiselect options={plainArray} isObject={false} />   */}
 <div className="example-wrapper">
@@ -216,6 +203,7 @@ handleSubmit_doc_home = async (e) =>{
                     />
                 </div>
             </div></Form.Group>
+
   <br/>
     <Form.Group>
     <Form.Label>Diaognized Diseases(Seperated by comma)</Form.Label>
