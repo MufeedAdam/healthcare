@@ -1,15 +1,17 @@
 pragma solidity >=0.4.21 <0.7.0;
+pragma experimental ABIEncoderV2;
 contract Record
 {
    
       //structure for the user or patient model
     struct user{
+        uint patid;
         string accountname; //user name
         string password;    //user password
         address useraddress; //user ethereum address
         bool set;
     }
-    uint256 public userCount=0; //number of user or patient registered
+    uint public userCount=0; //number of user or patient registered
      
     mapping(address => user)  public userlist;
    
@@ -29,15 +31,17 @@ contract Record
     function addUser(string memory _accountname,string memory _password, address  _useraddress,bool _userset) public{
         user storage User = userlist[_useraddress];
         require(!User.set);
-        incrementcount();   //keep count of no. of registered user
-        userlist[_useraddress]=user(_accountname,_password,_useraddress,_userset);
+        uint ui=incrementcount();   //keep count of no. of registered user
+        ui=ui-1;
+        userlist[_useraddress]=user(ui,_accountname,_password,_useraddress,_userset);
+         count.push(0);
     }
    
  
    
     //increments every time to keep track of registered user
-     function incrementcount() internal{
-        userCount+=1;
+     function incrementcount()   public returns(uint ){
+        return userCount+=1;
     }
    
    
@@ -50,8 +54,7 @@ contract Record
      
         bool set; //to check whether doctor exist
     }
-    uint256 public recordCount = 0;
-
+     uint[] count;
     //structure ro store record
     struct record{
     address patientaddress;
@@ -62,10 +65,9 @@ contract Record
    
     mapping (address => bool) public isHospital;
     mapping(address => doctor)  public doctorlist;
-    mapping(uint256 => record) public recordList;
-
+    mapping(address => mapping(uint => record)) recordList;
+    
      function addHospital(address _hospital)   public
-
     {
         isHospital[_hospital] = true;
         emit HospitalAddition(_hospital);
@@ -80,15 +82,25 @@ contract Record
     }
    
     function addRecord(address _patientaddress,string memory _recordhash) public{
-     
-        recordList[recordCount]=record(_patientaddress,_recordhash);
-        recordCount+=1;
+        uint got=getId(_patientaddress);
+        count[got] = count[got]+1;
+        uint go=count[got];
+        recordList[_patientaddress][go]=record(_patientaddress,_recordhash);
+        
     }
-    function getRecord(uint256 _recordnum) public view returns(
-     string memory  _recordhash,
-    address _patientaddress){
-         _recordhash=recordList[_recordnum].recordHash;
-         _patientaddress=recordList[_recordnum].patientaddress;
+   
+    function getRecord(address _patientaddress) public view returns(
+     string[] memory 
+    ){  
+        uint gotId=getId(_patientaddress);
+        uint recordcount=getRecordCountPatient(gotId);
+        recordcount=recordcount+1;
+        string[] memory ret = new string[](recordcount);
+            for(uint i=1;i<recordcount;i++)
+            {
+                ret[i] = recordList[_patientaddress][i].recordHash;
+            }
+            return ret;
     }
     function getDoctorName(address _docaddress)  public view returns(string memory){
         return doctorlist[_docaddress].doctorname;
@@ -97,6 +109,12 @@ contract Record
         return doctorlist[_docaddress].password;
     }
     
+   function getId(address _patientaddress) public view returns (uint){
+       return userlist[_patientaddress].patid;
+   }
    
+   function getRecordCountPatient(uint _num) public view returns(uint){
+       return count[_num];
+   }
    
 }

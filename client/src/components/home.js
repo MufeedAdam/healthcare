@@ -5,7 +5,7 @@ import {Card ,DropdownButton,Dropdown,Modal, CardDeck } from 'react-bootstrap';
 import { Chart } from "react-google-charts";
 import { Multiselect } from "multiselect-react-dropdown";
 import Navbar from './Navbar'
-import Activity from './Activity'
+import pat_activity from './pat_activity'
 import Labrecord from './Labrecord'
 import Login from './Login'
 import doc_login from './doc_login'
@@ -56,7 +56,7 @@ class Home extends Component{
     <div>
       <BrowserRouter>
       <Navbar/>
-      <Route path='/Activity' component={Activity} />
+      <Route path='/pat_activity' component={pat_activity} />
       <Route path='/Labrecord' component={Labrecord} />
       
       </BrowserRouter>
