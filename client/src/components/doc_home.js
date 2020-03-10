@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './doc_homy.css'
+import ipfs from '../ipfs'
 import { MDBInput } from "mdbreact";
 import {Card ,Form,DropdownButton,Dropdown,Modal, CardDeck,Button} from 'react-bootstrap';
 import { Chart } from "react-google-charts";
@@ -126,27 +127,28 @@ console.log(e.target.value)
 handleSubmit_doc_home = async (e) =>{
     e.preventDefault();
       
-   const disease=this.state.disease;
-   const diseases=disease.split(",");
+   const diseases=this.state.disease;
+   //const diseases=disease.split(",");
   // console.log(diseases) 
     
-   const medicines=this.state.medicines;
-   const medicine=medicines.split(",");
+   const medicine=this.state.medicines;
+   //const medicine=medicines.split(",");
    //console.log(medicine) 
    
    const ad_date=this.state.add_date;
    const add_date=new Date(ad_date).getTime()
    const unix_time=Math.floor(add_date/1000)
    //onsole.log(unix_time)
-   
-   const body={
+   const symptom=this.state.symptoms.join(",")
+   const body= {
       patname:this.state.patname,
       docaddr:this.state.docaddr,
       add_date:unix_time,
       disease:diseases,
       medicines:medicine ,
-      symptoms:symptoms
+      symptom:symptom
     }
+    console.log(body)
     //console.log(this.state.patname);
     //console.log(this.state.docaddr)
     //console.log(this.state.add_date);
@@ -154,9 +156,36 @@ handleSubmit_doc_home = async (e) =>{
     //console.log(this.state.medicines);
    // console.log(this.state.symptoms)
   //  console.log(body)
-    console.log(this.state.contract)
+    //console.log(this.state.accounts[0])
+
+    await ipfs.files.add(Buffer.from(JSON.stringify(body)))
+  .then(res => {
+    const hash = res[0].hash
+    console.log('added data hash:', hash)
+    this.setState({
+      getHash:hash
+    })
+    return ipfs.files.cat(hash)
+  })
+  .then(output => {
+    console.log('data : ',output)
+    console.log('retrieved data:', JSON.parse(output))
+  })
+  await ipfs.get(this.state.getHash)
+  .then(res=>{
+    console.log(JSON.parse(res[0].content))
+  })
+
+    try {
+      await this.state.contract.methods.addRecord(this.state.patname,this.state.getHash).send({ from: this.state.accounts[0]})
+    } catch (error) {
+      console.log("Error ::::",error)
+    }
+   // const password = await this.state.contract.methods.getRecord(body.patname,0).call();
+    //console.log(password)
+   // console.log("Done")
     
-    await this.state.contract.methods.addRecord(body.patname, body.docaddr,body.add_date,body.symptoms,body.medicines,body.disease).send({from:this.state.accounts[0]})
+    
    // const response = await this.state.contract.methods.getRecord(body.patname,0).call();
    // console.log(response)
 }

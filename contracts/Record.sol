@@ -1,5 +1,4 @@
 pragma solidity >=0.4.21 <0.7.0;
-pragma experimental ABIEncoderV2;
 contract Record
 {
    
@@ -55,19 +54,15 @@ contract Record
 
     //structure ro store record
     struct record{
-     string doctor;
-     string patient;
-     uint256 admissionDate;
-     string[] symptoms;
-     string[] disease;
-     string[] medicine;
+    address patientaddress;
+     string  recordHash;
     }
    
     event HospitalAddition(address hospital);
    
     mapping (address => bool) public isHospital;
     mapping(address => doctor)  public doctorlist;
-    mapping(string => mapping(uint256 => record)) public recordList;
+    mapping(uint256 => record) public recordList;
 
      function addHospital(address _hospital)   public
 
@@ -84,29 +79,24 @@ contract Record
         doctorlist[_doctoraddress]=doctor(_doctorname,_password,_doctoraddress,_doctorset);
     }
    
-    function addRecord(string memory _patientaddress,string memory _docaddress,uint256 _addmissiondate,string[] memory _symptomsnames,string[] memory _medicine,string[] memory _disease) public{
+    function addRecord(address _patientaddress,string memory _recordhash) public{
      
-        recordList[_patientaddress][recordCount]=record(_docaddress,_patientaddress,_addmissiondate,_symptomsnames,_disease,_medicine);
+        recordList[recordCount]=record(_patientaddress,_recordhash);
         recordCount+=1;
     }
-    function getRecord(string memory _patientaddress,uint256 _recordnum) public view returns(
-     string memory _doctor,
-     uint256 _admissionDate,
-     string[] memory _symptoms,
-     string[] memory _disease,
-     string[] memory _medicine){
-         _doctor=recordList[_patientaddress][_recordnum].doctor;
-       _medicine= recordList[_patientaddress][_recordnum].medicine;
-       _symptoms=recordList[_patientaddress][_recordnum].symptoms;
-       _disease=recordList[_patientaddress][_recordnum].disease;
-       _admissionDate=recordList[_patientaddress][_recordnum].admissionDate;
+    function getRecord(uint256 _recordnum) public view returns(
+     string memory  _recordhash,
+    address _patientaddress){
+         _recordhash=recordList[_recordnum].recordHash;
+         _patientaddress=recordList[_recordnum].patientaddress;
     }
-   
     function getDoctorName(address _docaddress)  public view returns(string memory){
         return doctorlist[_docaddress].doctorname;
     }
     function getDoctorPassword(address _docaddress)  public view returns(string memory){
         return doctorlist[_docaddress].password;
     }
+    
+   
    
 }
