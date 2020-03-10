@@ -178,6 +178,8 @@ handleSubmit_doc_home = async (e) =>{
 
     try {
       await this.state.contract.methods.addRecord(this.state.patname,this.state.getHash).send({ from: this.state.accounts[0]})
+      const response = await this.state.contract.methods.getNum(this.state.accounts[0]).call();
+    console.log(response)
     } catch (error) {
       console.log("Error ::::",error)
     }

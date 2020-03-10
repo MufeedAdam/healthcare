@@ -54,75 +54,15 @@ class pat_activity extends Component{
    
 
     // Get the value from the contract to prove it worked.
-    const response = await contract.methods.getNum(accounts[0]).call();
+   const response = await contract.methods.getNum(accounts[0]).call();
     console.log(response)
     // Update state with the result.
     //this.setState({ storageValue: response });
   };
 
-    constructor(props) {
-        super(props);
-    
-        this.state = {
-          symptoms: [],
-          probability:'',
-          prediction:''
-         
-        };
-      }
-    componentDidMount(){
-            
-
-        axios.get('http://www.arpithskumar.tech/apis/realtime/')
-        .then(response => {
-            this.setState({
-              symptoms: response.data.symptoms
-            });
-            console.log(this.state)
-          })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .finally(function () {
-          // always executed
-        
-        
-        });
-    }
-
-    handleSubmit = (e) =>{
-        e.preventDefault();
-        var str=this.state.symptom
-        var arr=str.join()
-        console.log(arr)
-        axios.post('http://www.arpithskumar.tech/apis/realtime/',[arr])
-        .then(response => {
-          
-            console.log(response)
-            this.setState({
-                    prediction:response.data.prediction,
-                    probability:response.data.probability
-            })
-          })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .finally(function () {
-          // always executed
-        });
-       
-    }
 
 
-    handlesymptoms = (e) =>{
-       
-        this.setState({
-          symptom: [e.target.value ]
-      });
-    
-    }
+
 
     render(){
         const post = this.state.probability ? (
