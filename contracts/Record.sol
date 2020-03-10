@@ -1,5 +1,4 @@
 pragma solidity >=0.4.21 <0.7.0;
-pragma experimental ABIEncoderV2;
 contract Record
 {
    
@@ -89,18 +88,12 @@ contract Record
         
     }
    
-    function getRecord(address _patientaddress) public view returns(
-     string[] memory 
+    function getRecord(address _patientaddress,uint num) public view returns(
+     string memory 
     ){  
-        uint gotId=getId(_patientaddress);
-        uint recordcount=getRecordCountPatient(gotId);
-        recordcount=recordcount+1;
-        string[] memory ret = new string[](recordcount);
-            for(uint i=1;i<recordcount;i++)
-            {
-                ret[i] = recordList[_patientaddress][i].recordHash;
-            }
-            return ret;
+        
+                return recordList[_patientaddress][num].recordHash;
+           
     }
     function getDoctorName(address _docaddress)  public view returns(string memory){
         return doctorlist[_docaddress].doctorname;
@@ -115,6 +108,11 @@ contract Record
    
    function getRecordCountPatient(uint _num) public view returns(uint){
        return count[_num];
+   }
+   
+   function getNum(address _patientaddress) public view returns(uint){
+       uint n=userlist[_patientaddress].patid;
+       return count[n];
    }
    
 }
