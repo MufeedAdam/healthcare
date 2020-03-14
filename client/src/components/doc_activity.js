@@ -5,12 +5,12 @@ import "./main.css";
 import {Card ,Table, DropdownButton,Dropdown,Modal, CardDeck,Form,Button} from 'react-bootstrap';
 import { BrowserRouter, Route } from 'react-router-dom'
 import { Multiselect } from "multiselect-react-dropdown";
-import Navbar from './Navbar'
+import DNavbar from './DNavbar'
 import { MultiSelect } from '@progress/kendo-react-dropdowns';
 
 
 import axios from 'axios'
-class Activity extends Component{
+class doc_activity extends Component{
    
     constructor(props) {
         super(props);
@@ -25,7 +25,7 @@ class Activity extends Component{
     componentDidMount(){
             
 
-        axios.get('http://www.arpithskumar.tech/apis/realtime/')
+        axios.get('http://127.0.0.1:8000/apis/realtime/')
         .then(response => {
             this.setState({
               symptoms: response.data.symptoms
@@ -48,7 +48,7 @@ class Activity extends Component{
         var str=this.state.symptom
         var arr=str.join()
         console.log(arr)
-        axios.post('http://www.arpithskumar.tech/apis/realtime/',[arr])
+        axios.post('http://127.0.0.1:8000/apis/realtime/',[arr])
         .then(response => {
           
             console.log(response)
@@ -87,7 +87,7 @@ class Activity extends Component{
         
         return(
             <div>
-            <Navbar/>
+            <DNavbar/>
             <div className="acti">
             <div className="container" >
 
@@ -121,4 +121,4 @@ class Activity extends Component{
 }
 
 
-export default Activity;
+export default doc_activity;

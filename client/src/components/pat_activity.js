@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Labrecord from './Labrecord'
 import Login from './Login'
 import "./main.css";
+import ipfs from '../ipfs'
 import {Card ,Table, DropdownButton,Dropdown,Modal, CardDeck,Form,Button} from 'react-bootstrap';
 import { BrowserRouter, Route } from 'react-router-dom'
 import { Multiselect } from "multiselect-react-dropdown";
@@ -9,14 +10,24 @@ import Navbar from './Navbar'
 import { MultiSelect } from '@progress/kendo-react-dropdowns';
 import RecordContract from "../contracts/Record.json";
 import getWeb3 from "../getWeb3";
-
+import ReactTable from 'react-table-6'
 
 import axios from 'axios'
 class pat_activity extends Component{
    
 
-  state = {  web3: null, accounts: null, contract: null, username: null, password: null, address: null};
+  constructor(props) {
+    super(props);
 
+    this.state = {  web3: null, accounts: null, contract: null, username: null, password: null, address: null,records:[],outbreak:null }; 
+  
+  }
+//records_list=this.state.records
+
+
+
+  
+  
   componentDidMount = async () => {
     try {
       // Get network provider and web3 instance.
@@ -48,79 +59,113 @@ class pat_activity extends Component{
     
   };  
 
+
+
+  // handle_table = ({records_list}) => {
+  //   const record = this.state.records.length ? (
+  //     records_list.map(record => 
+  //       {
+  //         return(
+  //           <p>{record.symptom}</p>
+  //         )
+  //       })
+  //   ):(
+  //     <p>Loading</p>
+  //   )
+  //     }
+
+
+
+
+
+
+
+
   runExample = async () => {
     const { accounts, contract } = this.state;
 
-   
+
+  
+   console.log(this.state.accounts[0])
 
     // Get the value from the contract to prove it worked.
-   const response = await contract.methods.getNum(accounts[0]).call();
+   const response = await contract.methods.getId(accounts[0]).call()
+    const responsenum = await contract.methods.getRecordCountPatient(response).call()
+    for(var i=1;i<=responsenum;i++)
+    {
+      const record = await contract.methods.getRecord(accounts[0],i).call()
+      console.log(record)
+       await ipfs.get(record)
+      .then(res=>{
+        console.log(JSON.parse(res[0].content))
+        this.state.records.push(JSON.parse(res[0].content))
+      })
+    
+    }
+    
     console.log(response)
+  console.log(responsenum)
+  console.log(this.state.records)
+  this.forceUpdate();
+
+  // for(var i=0;i<responsenum-1;i++){
+  //   console.log(this.state.records[i].symptom)
+  // }  
+ 
     // Update state with the result.
     //this.setState({ storageValue: response });
   };
-
+ 
 
 
 
 
     render(){
-        const post = this.state.probability ? (
-            <div >Probabilty : {
-                this.state.probability
-            }   <br></br>Prediction : {this.state.prediction} </div>
-          ) : (
-            <div>Loading Please wait....</div>
-          );
-        
-        return(
-            <div>
-            <Navbar/>
-            <div className="acti">
-            <div className="container" >
-            <Table striped bordered hover>
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Date</th>
-      <th>Doctor Name</th>
-      <th>Symptoms</th>
-      <th>Disease</th>
-      <th>Medicine</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-  
-  </tbody>
-</Table>
-                
+      
+      const  posts  = this.state.records
+      const postList = posts.length ? (
+        posts.map(post => {
+          var date= new Date(post.add_date*1000);
+         
+           
 
+            // Will display time in 10:30:23 format
+            var formattedTime = date.getUTCDate()+'/'+date.getUTCMonth()+'/'+date.getUTCFullYear();
 
-                <div >
-                </div>
-            </div>  
-            </div> 
+           
+          return (
+          
+            
+            
+            
+            
+            <div className="post card" key={post.id}>
+              <div className="card-content">
+                <span className="card-title">Date : {formattedTime}</span>
+                <p>Medicine : {post.medicines}</p>
+                <p>Symptoms : {post.symptom}</p>
+                <p>Disease : {post.disease}</p>
+              </div>
             </div>
-        )
-        
-       
-       
+          
+          )
+        })
+      ) : (
+        <div >Loading</div>
+      );
+  
+      return (
+        <div>
+           
+                <Navbar/>
+           
+          <div className="container">
+            <h4 className="center">Home</h4>
+            <br/><br/><br/>
+            {postList}
+          </div>
+        </div>
+      )
     }
 }
 

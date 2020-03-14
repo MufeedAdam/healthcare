@@ -5,9 +5,9 @@ import { MDBInput } from "mdbreact";
 import {Card ,Form,DropdownButton,Dropdown,Modal, CardDeck,Button} from 'react-bootstrap';
 import { Chart } from "react-google-charts";
 import { Multiselect } from "multiselect-react-dropdown";
-import Navbar from './Navbar'
-import Activity from './Activity'
-import Labrecord from './Labrecord'
+import DNavbar from './DNavbar'
+import doc_activity from './doc_activity'
+import doc_labrecord from './doc_labrecord'
 import Login from './Login'
 import getWeb3 from "../getWeb3";
 import RecordContract from "../contracts/Record.json";
@@ -177,14 +177,15 @@ handleSubmit_doc_home = async (e) =>{
   })
 
     try {
-      await this.state.contract.methods.addRecord(this.state.patname,this.state.getHash).send({ from: this.state.accounts[0]})
-      const response = await this.state.contract.methods.getNum(this.state.accounts[0]).call();
-    console.log(response)
+     const s= await this.state.contract.methods.addRecord(this.state.patname,this.state.getHash).send({ from: this.state.accounts[0]})
+    console.log(s);
+      
     } catch (error) {
       console.log("Error ::::",error)
     }
-   // const password = await this.state.contract.methods.getRecord(body.patname,0).call();
-    //console.log(password)
+
+    
+  
    // console.log("Done")
     
     
@@ -198,9 +199,9 @@ handleSubmit_doc_home = async (e) =>{
   return(
     <div>
       <BrowserRouter>
-      <Navbar/>
-      <Route path='/Activity' component={Activity} />
-      <Route path='/Labrecord' component={Labrecord} />
+      <DNavbar/>
+      <Route path='/doc_activity' component={doc_activity} />
+      <Route path='/doc_labrecord' component={doc_labrecord} />
       
       </BrowserRouter>
         <div className="entire-page">

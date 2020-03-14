@@ -91,7 +91,7 @@ contract Record
     function getRecord(address _patientaddress,uint num) public view returns(
      string memory 
     ){  
-        
+            
                 return recordList[_patientaddress][num].recordHash;
            
     }
