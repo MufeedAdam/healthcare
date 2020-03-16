@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './homy.css'
 import 'leaflet/dist/leaflet.css'
-import {Card ,DropdownButton,Dropdown,Modal, CardDeck } from 'react-bootstrap';
+import {Card, CardDeck} from 'react-bootstrap';
 import { Chart } from "react-google-charts";
 import { Multiselect } from "multiselect-react-dropdown";
 import Navbar from './Navbar'
@@ -163,8 +163,8 @@ class Home extends Component{
       
       </BrowserRouter>  
         <div className="entire-page">
-           
-            <Card className="card-style">
+        <CardDeck>   
+            <Card >
             <Card.Header>Regional Outbreak Warning</Card.Header>
             <Card.Body>
             <blockquote className="blockquote mb-0">
@@ -180,7 +180,9 @@ Each year, an estimated 400 million people are infected with dengue virus. About
             </blockquote>
             </Card.Body>
             </Card>
-            <CardDeck>
+            
+<CardDeck>
+             
 <Card >
 <Card.Header>Activity Graph</Card.Header>   
    <div className="chart-design">
@@ -222,13 +224,13 @@ Each year, an estimated 400 million people are infected with dengue virus. About
 />
 </div>
 </Card>
-
+</CardDeck>
+<br/>
 <Card>
-<Card.Header>Possible Outbreaks</Card.Header>   
+<Card.Header>Possible Symptoms</Card.Header>   
  <br/>
  <Multiselect options={plainArray} isObject={false} />
 <br/>
-<Card.Header>Possible disease</Card.Header>   
 {/*<Modal.Dialog>
   <Modal.Header>
     <Modal.Title>Disease Name</Modal.Title>
@@ -238,53 +240,16 @@ Each year, an estimated 400 million people are infected with dengue virus. About
     <p>A brief description about the disease</p>
   </Modal.Body>
 </Modal.Dialog>*/}
+<h6 align="center">Predicted Possible disease:</h6>
 <h1 className="predicted">FEVER</h1>
 
 </Card>
-
-
-
-<Card>   
-  <div className="leaflet-container"> 
-  <Map className="map" center={position} zoom={this.state.zoom} onClick={(e) =>this.handleClick(e)}>
-       <TileLayer
-         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-       />
-
-
-       {this.state.haveUsersLocation?
-       <Marker 
-       position={position}
-       icon={myIcon}>
-         <Popup>
-           A pretty CSS3 popup. <br /> Easily customizable.
-         </Popup>
-       </Marker> : ''
-      }
-
-     </Map>
-     </div>
-     </Card>
-
-    
-
-
-     <div className="button-design">
-   <button type="button" onClick={(e)=>this.onsubmit(e)} className="btn btn-pill btn-danger">Send</button>
-</div>
-
-
-<Card>
-<Card.Header>Possible Outbreaks</Card.Header>
-<h6>Output : {post}</h6>
-</Card>
-
-
-
 </CardDeck>
 <br></br>
 <br></br>
+<Card >
+<Card.Header>Tasks for You!</Card.Header>
+</Card>
         </div>
         </div>
     )

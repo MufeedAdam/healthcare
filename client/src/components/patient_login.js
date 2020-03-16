@@ -116,7 +116,7 @@ class patient_login extends Component {
         return (
             <div id="app">
           <form>
-            <h2>Sign Up!</h2>
+            <h2 className="dheading">Sign Up!</h2>
             <fieldset>
               <legend>Create Account</legend>
               <ul>
@@ -134,8 +134,8 @@ class patient_login extends Component {
                 </li>
               </ul>
             </fieldset>
-            <button onClick={(e) => this.handleSubmit_pat(e)}>Submit</button>
-            <button type="button" onClick={ () => this.changeView("logIn")}>Have an Account?</button>
+            <button className="dbtn" onClick={(e) => this.handleSubmit_pat(e)}>Submit</button>
+            <button className="dbtn" type="button" onClick={ () => this.changeView("logIn")}>Have an Account?</button>
           </form>
           </div>
         )
@@ -143,7 +143,7 @@ class patient_login extends Component {
       case "logIn":
         return (
           <form>
-            <h2>Welcome Back!</h2>
+            <h2 className="dheading">Welcome Back!</h2>
             <fieldset>
               <legend>Log In</legend>
               <ul>
@@ -159,37 +159,15 @@ class patient_login extends Component {
                   <label for="password">Password:</label>
                   <input type="password" id="password" onChange={(e) =>this.handlepassword(e)} required/>
                 </li>
-                <li>
-                  <i/>
-                  <a onClick={ () => this.changeView("PWReset")} href="#">Forgot Password?</a>
-                </li>
+               
               </ul>
             </fieldset>
-            <button onClick={(e) =>this.handleSubmit_pat_signin(e)}>Login</button>
-            <button type="button" onClick={(e) =>this.handleSubmit_pat(e)}>Create an Account</button>
+            <button className="dbtn" onClick={(e) =>this.handleSubmit_pat_signin(e)}>Login</button>
+            <button className="dbtn" type="button" onClick={(e) =>this.handleSubmit_pat(e)}>Create an Account</button>
           </form>
         )
         break
-      case "PWReset":
-        return (
-          <form>
-          <h2>Reset Password</h2>
-          <fieldset>
-            <legend>Password Reset</legend>
-            <ul>
-              <li>
-                <em>A reset link will be sent to your inbox!</em>
-              </li>
-              <li>
-                <label for="email">Email:</label>
-                <input type="email" id="email" required/>
-              </li>
-            </ul>
-          </fieldset>
-          <button>Send Reset Link</button>
-          <button type="button" onClick={(e) =>this.handleSubmit_pat(e)}>Submit </button>
-        </form>
-        )
+     
       default:
         break
     }
@@ -198,7 +176,7 @@ class patient_login extends Component {
 
   render() {
     return (
-      <section id="entry-page">
+      <section className="sec">
         {this.currentView()}
       </section>
     )

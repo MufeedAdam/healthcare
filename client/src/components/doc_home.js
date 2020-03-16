@@ -228,7 +228,7 @@ handleSubmit_doc_home = async (e) =>{
 <div className="example-wrapper">
                 <div>
                     <div>Possible symptoms:</div>
-                    <MultiSelect
+                    <MultiSelect className="multii"
                         data={symptoms}
                         onChange={this.handlesymptoms}
                         value={this.state.value}

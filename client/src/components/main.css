@@ -5,12 +5,7 @@
     margin-bottom: 5%;
 }
 
-.main-card{
-    margin-left: 30%;
-    margin-right: 30%;
-    margin-top: 10%;
-    background-color:white;
-}
+
 .center p{
     color: black;
 }
@@ -22,4 +17,23 @@
 
 .multi{
     color:black;
+}
+
+.parti{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+
+.deck{
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 7%;
+}
+
+.login-head{
+    font-family: baufra;
+    margin-top: 2%;
 }

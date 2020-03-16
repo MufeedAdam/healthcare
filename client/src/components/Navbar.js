@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom'
-import './homy.css'
+import './navcss.css'
 import 'materialize-css/dist/css/materialize.min.css'
 const Navbar = () => {
     return (
@@ -8,9 +8,10 @@ const Navbar = () => {
             <div className="container">
                 <ul><li className="logo">GAMA</li></ul>
                 <ul className="right">
-                    <li><Link to="/home" className="nav-text">Home</Link></li>
-                    <li><NavLink to="/pat_activity" className="nav-text">Activity</NavLink></li>
-                    <li><NavLink to="/Labrecord" className="nav-text">Lab Records</NavLink></li>
+                    <li><a href="/home" className="nav-text"><b>Home</b></a></li>
+                    <li><a href="/pat_activity" className="nav-text"><b>Activity</b></a></li>
+                    <li><a href="/Labrecord" className="nav-text"><b>Lab Records</b></a></li>
+                    <li><a href="/" className="nav-text"><b>Logout</b></a></li>
                 </ul>
             </div>
         </nav>

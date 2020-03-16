@@ -1,0 +1,8 @@
+.dnav-design{
+    margin-top: 0rem;
+    color:white;
+    background-color:#26a69a;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}

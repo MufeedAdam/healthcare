@@ -1,16 +1,17 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom'
-import './homy.css'
+import './Dnav.css'
 import 'materialize-css/dist/css/materialize.min.css'
 const DNavbar = () => {
     return (
-        <nav className="nav-design">
+        <nav className="dnav-design">
             <div className="container">
                 <ul><li className="logo">GAMA</li></ul>
                 <ul className="right">
-                    <li><Link to="/doc_home" className="nav-text">Doc_Home</Link></li>
-                    <li><NavLink to="/doc_activity" className="nav-text">Doc_Activity</NavLink></li>
-                    <li><NavLink to="/doc_labrecord" className="nav-text">Doc_Lab Records</NavLink></li>
+                    <li><a href="/doc_home" className="nav-text"><b>Doc_Home</b></a></li>
+                    <li><a href="/doc_activity" className="nav-text"><b>Doc_Activity</b></a></li>
+                    <li><a href="/doc_labrecord" className="nav-text"><b>Doc_Lab Records</b></a></li>
+                    <li><a href="/" className="nav-text"><b>Logout</b></a></li>
                 </ul>
             </div>
         </nav>
