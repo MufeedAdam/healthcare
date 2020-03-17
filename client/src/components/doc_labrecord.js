@@ -11,33 +11,12 @@ const doc_labrecord = () => {
         <div> 
             <DNavbar/>
             <div className="entire-page">
-            <Table striped bordered hover>
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Date</th>
-      <th>Symptoms</th>
-      <th>Predicted Disease</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      
-    </tr>
-  
-  </tbody>
-</Table>
+            <Card>
+              <Card.Header>Upload the file in <b>.csv</b> format</Card.Header>
+              <Card.Body>
+              <input type="file" name="file" />
+              </Card.Body>
+            </Card>
    
             </div>
             </div>

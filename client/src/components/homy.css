@@ -96,5 +96,13 @@ border-left: 5px solid #ef8f1d;
     width: 80%;
     margin: 0 auto;
   }
+.confirm{
+    margin-left: 40%;
+}
+.go-back{
+    margin-left: 47%;
+}
 
-  
+.deck{
+    margin: 5%;
+}

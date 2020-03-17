@@ -1,0 +1,30 @@
+.pat{
+    margin-left:17%;
+    margin-right: 17%;
+    margin-top: 7%;
+    margin-bottom: 33%;
+
+}
+
+.ig{
+    width: 450px;
+    height: 450px;
+}
+
+.def{
+    margin-top: 5%;
+    margin-left: 29%;
+    margin-right: 29%;
+}
+
+.default{
+    margin-top:15%;
+    margin-left: 45%;
+    background-color: green;
+}
+.remove{
+    background-color: red;
+    margin-left: 45%;
+    margin-top:1%;
+    
+}

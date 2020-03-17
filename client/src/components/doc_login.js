@@ -87,7 +87,7 @@ class doc_login extends Component {
     {
       console.log("Correct")
       alert("Successful")
-      window.location.href="doc_home"
+      window.location.href="doc_entry"
     }
     else
     {

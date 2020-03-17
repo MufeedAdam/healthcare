@@ -2,6 +2,7 @@ import './doc_login.css'
 import React, {Component} from 'react';
 import getWeb3 from "../getWeb3";
 import RecordContract from "../contracts/Record.json";
+import { geolocated } from "react-geolocated";
 
 class patient_login extends Component {
   constructor(props){
@@ -14,6 +15,10 @@ class patient_login extends Component {
   state = {  web3: null, accounts: null, contract: null, username: null, password: null, address: null};
 
   componentDidMount = async () => {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+    });
     try {
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
@@ -161,6 +166,7 @@ class patient_login extends Component {
                 </li>
                
               </ul>
+
             </fieldset>
             <button className="dbtn" onClick={(e) =>this.handleSubmit_pat_signin(e)}>Login</button>
             <button className="dbtn" type="button" onClick={(e) =>this.handleSubmit_pat(e)}>Create an Account</button>
