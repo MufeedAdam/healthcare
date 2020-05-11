@@ -19,7 +19,9 @@ import symptom_page from "./components/symptom_page.js";
 import lab_analysis from "./components/lab_analysis.js";
 import doc_entry from "./components/doc_entry.js";
 import pat_access from "./components/pat_access.js";
-
+import heart_disease from "./components/heart_disease"
+import kidney_disease from "./components/kidney_disease"
+import liver_disease from "./components/liver_disease"
 class App extends Component {
 
 
@@ -41,6 +43,9 @@ class App extends Component {
        <Route path='/lab_analysis' component={lab_analysis} />
        <Route path='/doc_entry' component={doc_entry} />
        <Route path='/pat_access' component={pat_access} />
+       <Route path='/heart_disease' component={heart_disease} />
+       <Route path='/kidney_disease' component={kidney_disease} />
+       <Route path='/liver_disease' component={liver_disease} />
          
       <Route path="/" component={Login} />
        

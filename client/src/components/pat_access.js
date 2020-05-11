@@ -14,22 +14,24 @@ import ReactTable from 'react-table-6'
 
 class pat_access extends Component{
     
-    handleSubmit_doc = (e) =>{
-        e.preventDefault();
-      
-          window.location.href='home';
-      
-          
+    
+      grant(){
+        alert("Access granted to requested doctor");
       }
+      remove_access(){
+        alert("Doctor won't be able to access your data anymore!")
+      }
+          
+     
 render(){
     return(
         <div>
             <Navbar/>
             
-            <Button className="default" onClick={console.log("function to grant access")}>Grant Access</Button>
+            <button className="default" onClick={this.grant}>Grant Access</button>
             <br></br>
             <br></br>
-            <Button className="remove" onclick={console.log("function to remove access")}>Cancel Access</Button>
+            <button className="remove" onClick={this.remove_access}>Cancel Access</button>
             
         </div>
     )

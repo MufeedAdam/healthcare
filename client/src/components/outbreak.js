@@ -27,8 +27,8 @@ render(){
 <Card className="out">
     <Card.Header>Disease found near your region</Card.Header>
     <Card.Body> 
-        Malaria<br/>
-        Stay Safe!
+        <b>Corona Virus</b><br/>
+        Stay Home!Stay Safe
     </Card.Body>
     </Card>
     <Button className="go-back" onClick={(e) =>this.goback(e)}>Go Back</Button>

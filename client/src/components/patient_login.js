@@ -12,12 +12,14 @@ class patient_login extends Component {
     }
   }
 
-  state = {  web3: null, accounts: null, contract: null, username: null, password: null, address: null};
+  state = {  web3: null, accounts: null, contract: null, username: null, password: null, address: null, lat:'',long:''};
 
   componentDidMount = async () => {
+    var lat=''
+    var long=''
     navigator.geolocation.getCurrentPosition(function(position) {
-      console.log("Latitude is :", position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
+    lat=position.coords.latitude;
+    long=position.coords.longitude;
     });
     try {
       // Get network provider and web3 instance.
@@ -36,7 +38,7 @@ class patient_login extends Component {
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance });
+      this.setState({ web3, accounts, contract: instance, lat, long });
       
     } catch (error) {
       // Catch any errors for any of the above operations.
@@ -53,8 +55,14 @@ class patient_login extends Component {
     const body={
       username:this.state.username,
       address:this.state.address,
-      password:this.state.password
+      password:this.state.password,
+      
+      lat:this.state.lat,
+      long:this.state.long
     }
+    console.log(this.state.lat)
+    console.log(this.state.long)
+
     await this.state.contract.methods.addUser(body.username,body.password,body.address,'True').send({ from: this.state.accounts[0] })
     // Get the value from the contract to prove it worked.
    const response = await this.state.contract.methods.find_user_name(body.address).call();
